@@ -1,7 +1,6 @@
-const axios = require("axios");
 const User = require("../models/User");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { models } = require("mongoose");
+// const { models } = require("mongoose");
 
 const genAI = new GoogleGenerativeAI(process.env.BEARER_TOKEN);
 
