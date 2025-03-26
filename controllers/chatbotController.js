@@ -24,19 +24,19 @@ exports.getfitnessplan = async (req, res) => {
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const prompt = `Generate a customized fitness plan based on:  
-    Age: ${age} years  
-    Height: ${height} cm  
-    Weight: ${weight} kg  
-    Goal: ${goal} (e.g., fat loss, muscle gain)  
-    Activity Level: ${activityLevel}   
+    const prompt = `Generate a personalized fitness plan with visuals based on:  
+    - **Age:** ${age} years  
+    - **Height:** ${height} cm  
+    - **Weight:** ${weight} kg  
+    - **Goal:** ${goal} (e.g., fat loss, muscle gain)  
+    - **Activity Level:** ${activityLevel}  
     
-    Workout Routine:  
-    Strength Training 💪 - Recommend exercises for upper and lower body  
-    Cardio 🏃‍♂️ - Provide goal-based cardio suggestions  
-    Flexibility & Recovery 🧘‍♂️ - Include stretching and recovery tips  
+    **Workout Routine:**  
+    - **Strength 💪** – Key upper & lower body exercises  
+    - **Cardio 🏃‍♂️** – Goal-specific cardio recommendations  
+    - **Flexibility 🧘‍♂️** – Essential stretching & recovery tips  
     
-    Ensure the plan is structured, engaging, and easy to follow. and small`;
+    Keep the response **short, structured, and visually engaging** with high-quality images.`;  
 
     const result = await model.generateContent(prompt);
     const fitnessPlan = await result.response.text();
@@ -53,26 +53,6 @@ exports.getDietplan = async (req, res) => {
 
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-//     const prompt = `Create a personalized real-time diet plan based on:  
-// Age: ${age} years  
-// Weight: ${weight} kg  
-// Goal: ${goal} (e.g., weight loss, muscle gain)  
-// Diet Type: ${diettype} (${
-//       diettype === "Vegetarian" ? "Plant-based 🌱" : "Non-vegetarian 🍗"
-//     })  
-
-// Meal Plan:  
-// Breakfast ☀️ - Suggest a nutritious option  
-// Lunch 🍱 - Provide a balanced meal recommendation  
-// Dinner 🌙 - Include a healthy and filling dinner  
-// Snacks 🍎 - Recommend light and healthy snack choices  
-
-// Ensure meals have balanced proteins, carbs, and fats using ${
-//       diettype === "Vegetarian"
-//         ? "plant-based sources like tofu, quinoa, and lentils"
-//         : "lean meats, eggs, and fish"
-//     } for optimal nutrition. Keep the recommendations simple, practical, and easy to follow. and small`;
 
 const prompt = `Generate a personalized diet plan with high-quality images based on:  
 - **Age:** ${age} years  
