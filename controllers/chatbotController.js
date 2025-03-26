@@ -54,25 +54,40 @@ exports.getDietplan = async (req, res) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const prompt = `Create a personalized real-time diet plan based on:  
-Age: ${age} years  
-Weight: ${weight} kg  
-Goal: ${goal} (e.g., weight loss, muscle gain)  
-Diet Type: ${diettype} (${
-      diettype === "Vegetarian" ? "Plant-based 🌱" : "Non-vegetarian 🍗"
-    })  
+//     const prompt = `Create a personalized real-time diet plan based on:  
+// Age: ${age} years  
+// Weight: ${weight} kg  
+// Goal: ${goal} (e.g., weight loss, muscle gain)  
+// Diet Type: ${diettype} (${
+//       diettype === "Vegetarian" ? "Plant-based 🌱" : "Non-vegetarian 🍗"
+//     })  
 
-Meal Plan:  
-Breakfast ☀️ - Suggest a nutritious option  
-Lunch 🍱 - Provide a balanced meal recommendation  
-Dinner 🌙 - Include a healthy and filling dinner  
-Snacks 🍎 - Recommend light and healthy snack choices  
+// Meal Plan:  
+// Breakfast ☀️ - Suggest a nutritious option  
+// Lunch 🍱 - Provide a balanced meal recommendation  
+// Dinner 🌙 - Include a healthy and filling dinner  
+// Snacks 🍎 - Recommend light and healthy snack choices  
 
-Ensure meals have balanced proteins, carbs, and fats using ${
-      diettype === "Vegetarian"
-        ? "plant-based sources like tofu, quinoa, and lentils"
-        : "lean meats, eggs, and fish"
-    } for optimal nutrition. Keep the recommendations simple, practical, and easy to follow. and small`;
+// Ensure meals have balanced proteins, carbs, and fats using ${
+//       diettype === "Vegetarian"
+//         ? "plant-based sources like tofu, quinoa, and lentils"
+//         : "lean meats, eggs, and fish"
+//     } for optimal nutrition. Keep the recommendations simple, practical, and easy to follow. and small`;
+
+const prompt = `Generate a personalized diet plan with high-quality images based on:  
+- **Age:** ${age} years  
+- **Weight:** ${weight} kg  
+- **Goal:** ${goal} (e.g., weight loss, muscle gain)  
+- **Diet Type:** ${diettype} (${diettype === "Vegetarian" ? "Plant-based 🌱" : "Non-vegetarian 🍗"})  
+Provide a **compact meal plan** with balanced macros:  
+- **Breakfast ☀️** – Nutritious and energy-boosting  
+- **Lunch 🍱** – Well-balanced with proteins, carbs, and healthy fats  
+- **Dinner 🌙** – Light yet filling for recovery  
+- **Snacks 🍎** – Healthy, quick, and easy options  
+
+Use **${diettype === "Vegetarian" ? "plant-based proteins (tofu, quinoa, lentils)" : "lean meats, eggs, and fish)"}**.  
+Keep the response **short, professional, visually appealing and readable with relevant images**.`;
+
 
     const result = await model.generateContent(prompt);
     const dietPlan = await result.response.text();
